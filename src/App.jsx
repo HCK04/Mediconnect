@@ -1,11 +1,17 @@
 import React from 'react';
-
+import { Routes, Route } from 'react-router-dom';
+import Body from './Body';
+import Navbar from './Navbar';
+import AjouterForm from './AjouterForm';
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to My Vite React App</h1>
-      <p>This is your main app component.</p>
-    </div>
+    <>
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<Body/>}></Route>
+        <Route path='/AjouterForm' element={<AjouterForm/>}></Route>    
+      </Routes>
+    </>
   );
 }
 
