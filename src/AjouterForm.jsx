@@ -1,9 +1,32 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 function AjouterForm() {
 
+    // All consts
     const maladies = [{id: 1, maladie: "tari9"}, {id:2, maladie: "rkabi"}, {id:3, maladie: "dajaj"}]
+    const dispatch = useDispatch()
+    const [user, setUser] = useState({role: "", first_name: "", last_name: "", adress: "", maladie: {}, tel: ""} )
 
 
 
+    function InputsChange(e){
+        let key = e.target.name
+        let value = e.target.value
+        let _user = {...user}
+        _user[key] = value
+        setUser(_user)
+    }
+
+    function SelectOnChange(selected){
+        const selectedItem = maladies.find((item)=>{
+            return selected == item.id
+        })
+        setUser({...user, maladie: selectedItem})
+    }
+
+
+    console.log(user)
   return (
     <>
       <div class="bg-gray-100 dark:bg-gray-900 mt-12">
@@ -39,6 +62,9 @@ function AjouterForm() {
                     type="text"
                     id="first_name"
                     class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                    onChange={InputsChange}
+                    name="first_name"
+                    
                   ></input>
                 </div>
                 <div>
@@ -51,7 +77,9 @@ function AjouterForm() {
                   <input
                     type="text"
                     id="last_name"
+                    name="last_name"
                     class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                    onChange={InputsChange}
                   ></input>
                 </div>
               </div>
@@ -67,6 +95,8 @@ function AjouterForm() {
                   type="text"
                   id="address"
                   class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  onChange={InputsChange}
+                  name="adress"
                 />
               </div>
 
@@ -78,7 +108,7 @@ function AjouterForm() {
                   >
                     Type Maladie
                   </label>
-                <select class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-inset">
+                <select name="maladie" class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-inset" onChange={(e)=>{SelectOnChange(e.target.value)}}>
                     {maladies.map((item, index)=>{
                         return(
                             <option value={item.id} key={index}>{item.maladie}</option>
@@ -93,12 +123,14 @@ function AjouterForm() {
                     for="zip"
                     class="block text-gray-700 dark:text-white mb-1"
                   >
-                    ZIP Code
+                    Tel
                   </label>
                   <input
                     type="text"
                     id="zip"
+                    name="tel"
                     class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                    onChange={InputsChange}
                   />
                 </div>
               </div>
