@@ -9,6 +9,6 @@ import Admin from './Admin.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Navbar/>
-    <Body/>
+    <Admin/>
   </StrictMode>,
 )
