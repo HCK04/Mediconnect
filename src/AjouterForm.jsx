@@ -25,6 +25,10 @@ function AjouterForm() {
         setUser({...user, maladie: selectedItem})
     }
 
+    function AjouterButton(){
+      
+    }
+
 
     console.log(user)
   return (
