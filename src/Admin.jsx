@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { SupprimerUserAction } from "./redux/actions/adminAction";
 
 
-function Admin() {
+function Admin({setSelectedId}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -16,33 +18,43 @@ function Admin() {
     setSelectedUser(null);
   };
 
-  const users = [
-    {
-      name: "Dr. tari9",
-      status: "Médecin",
-      date: "12/01/2023",
-      contact: "tari9@tari9.com",
-      role: "Cardiologue",
-      imageUrl: "https://robohash.org/mail@ashallendesign.co.uk",
-    },
-    {
-      name: "7amouda belakoul",
-      status: "Patient",
-      date: "15/02/2022",
-      contact: "9irat@tari9.com",
-      role: "Patient",
-      imageUrl:
-        "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-    },
-    {
-      name: "Dr. lokmane",
-      status: "Médecin",
-      date: "08/11/2021",
-      contact: "lokma@tari9.com",
-      role: "Pédiatre",
-      imageUrl: "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk",
-    },
-  ];
+  const dispatch = useDispatch()
+
+  function supprimerUser(id){
+    dispatch(SupprimerUserAction(id))
+  }
+
+  // const users = [
+  //   {
+  //     name: "Dr. tari9",
+  //     status: "Médecin",
+  //     date: "12/01/2023",
+  //     contact: "tari9@tari9.com",
+  //     role: "Cardiologue",
+  //     imageUrl: "https://robohash.org/mail@ashallendesign.co.uk",
+  //   },
+  //   {
+  //     name: "7amouda belakoul",
+  //     status: "Patient",
+  //     date: "15/02/2022",
+  //     contact: "9irat@tari9.com",
+  //     role: "Patient",
+  //     imageUrl:
+  //       "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+  //   },
+  //   {
+  //     name: "Dr. lokmane",
+  //     status: "Médecin",
+  //     date: "08/11/2021",
+  //     contact: "lokma@tari9.com",
+  //     role: "Pédiatre",
+  //     imageUrl: "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk",
+  //   },
+  // ];
+
+  const users = useSelector((state)=>state.AllUsers)
+
+  console.log(users)
 
   return (
     <>
@@ -100,7 +112,7 @@ function Admin() {
                     <td className="px-4 py-3 text-sm border">{user.contact}</td>
                     <td className="px-4 py-3 text-sm border">
                       <div className="flex space-x-2">
-                        <button className="px-2 py-1 text-sm font-medium leading-5 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                        <button onClick={()=>setSelectedId(user.id)} className="px-2 py-1 text-sm font-medium leading-5 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                           Modifier
                         </button>
                         <button
@@ -109,7 +121,7 @@ function Admin() {
                         >
                           Voir
                         </button>
-                        <button className="px-2 py-1 text-sm font-medium leading-5 text-white bg-red-600 rounded-lg hover:bg-red-700">
+                        <button onClick={()=>supprimerUser(user.id)} className="px-2 py-1 text-sm font-medium leading-5 text-white bg-red-600 rounded-lg hover:bg-red-700">
                           Supprimer
                         </button>
                       </div>
