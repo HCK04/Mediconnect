@@ -31,19 +31,16 @@ function Admin({ setSelectedId }) {
     setIsDeleteModalOpen(true);
   }
 
+
+
   const users = useSelector((state) => state.AllUsers);
 
   const handleSearch = () => {
-    if (searchBar === "") {
-      console.log("Please enter a valid search term");
-      return;
-    } else {
       const filtered = users.filter((user) => {
         return user.first_name.toLowerCase().includes(searchBar.toLowerCase()) ||
         user.last_name.toLowerCase().includes(searchBar.toLowerCase());
       });
       setFilteredUsers(filtered);
-    }
   };
 
   return (
@@ -238,9 +235,8 @@ function Admin({ setSelectedId }) {
                 />
                 <div>
                   <p className="text-2xl font-semibold text-gray-800">
-                    {selectedUser.name}
+                    {selectedUser.first_name}
                   </p>
-                  <p className="text-sm text-gray-600">{selectedUser.role}</p>
                 </div>
               </div>
               <div className="space-y-3 text-gray-700">
