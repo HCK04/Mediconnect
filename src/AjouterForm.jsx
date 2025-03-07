@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AjouterUserAction } from "./redux/actions/adminAction";
 import { useNavigate } from "react-router-dom";
+import pfp from "./img/hero.png";
 
 function AjouterForm() {
-  // All consts
   const maladies = [
     { id: 1, maladie: "tari9" },
     { id: 2, maladie: "rkabi" },
-    { id: 3, maladie: "dajaj" }
+    { id: 3, maladie: "dajaj" },
   ];
+  
   const dispatch = useDispatch();
+  const DEFAULT_PFP = pfp;
   const [user, setUser] = useState({
     id: "",
     role: "",
@@ -18,14 +20,19 @@ function AjouterForm() {
     last_name: "",
     adress: "",
     maladie: {},
-    tel: ""
+    tel: "",
+    date: "",
+    photo_profile: DEFAULT_PFP,
   });
-  const [selectedRole, setSelectedRole] = useState(""); // State for selected role
+
+  const [selectedRole, setSelectedRole] = useState("");
   const users = useSelector((state) => state.AllUsers);
   const navigate = useNavigate();
 
   function ajouterUser() {
-    dispatch(AjouterUserAction(user));
+    const currentdate = new Date().toISOString();
+    const updatedUser = { ...user, date: currentdate, photo_profile: DEFAULT_PFP };
+    dispatch(AjouterUserAction(updatedUser));
     navigate("/Admin");
   }
 
@@ -43,8 +50,14 @@ function AjouterForm() {
 
   function handleRoleChange(e) {
     const role = e.target.value;
-    setSelectedRole(role); // Update the role state
-    setUser({ ...user, role }); // Update the user state with the role
+    const updatedUser = { ...user, role };
+    
+    if (role === "Docteur" || role === "Admin") {
+      updatedUser.tel = "none";
+    }
+
+    setSelectedRole(role);
+    setUser(updatedUser);
   }
 
   function SelectOnChange(selected) {
@@ -166,6 +179,7 @@ function AjouterForm() {
                       name="tel"
                       className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
                       onChange={InputsChange}
+                      value={user.tel}
                     />
                   </div>
                 </div>

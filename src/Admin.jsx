@@ -43,6 +43,8 @@ function Admin({ setSelectedId }) {
       setFilteredUsers(filtered);
   };
 
+  console.log(users)
+
   return (
     <>
       {/* NAVBAR */}
@@ -93,11 +95,33 @@ function Admin({ setSelectedId }) {
           </div>
         </button>
       </label>
-
-      <section className="container mx-auto p-6 font-sans h-screen mt-12">
-        <div className="w-full h-full mb-8 overflow-hidden rounded-lg shadow-lg">
-          <div className="w-full h-full overflow-x-auto">
-            <table className="w-full h-full">
+  {/* Button positioned at the top-right */}
+  
+          <div className="flex justify-center mt-10">
+            <Link to={"/AjouterForm"}>
+              <button className="px-4 py-2 text-sm font-medium leading-5 text-white bg-green-600 rounded-lg hover:bg-green-700 flex items-center space-x-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
+                </svg>
+                <span>Ajouter Utilisateur</span>
+              </button>
+            </Link>
+          </div>
+      <section className="container mx-auto p-0 font-sans h-screen mt-6">
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <div className="w-full overflow-x-auto">
+            <table className="w-full">
               <thead>
                 <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                   <th className="px-4 py-3">Nom</th>
@@ -145,7 +169,7 @@ function Admin({ setSelectedId }) {
                         </span>
                       </td>
                       <td className="px-4 py-3 text-sm border">{user.date}</td>
-                      <td className="px-4 py-3 text-sm border">{user.Tel}</td>
+                      <td className="px-4 py-3 text-sm border">{user.tel}</td>
                       <td className="px-4 py-3 text-sm border">
                         <div className="flex space-x-2">
                           <button
@@ -179,11 +203,7 @@ function Admin({ setSelectedId }) {
           </div>
         </div>
       </section>
-      <Link to={"/AjouterForm"}>
-        <button className="px-2 py-1 text-sm font-medium leading-5 text-white bg-red-600 rounded-lg hover:bg-red-700">
-          Ajouter Utilisateur
-        </button>
-      </Link>
+
 
       {/* delete Card */}
 

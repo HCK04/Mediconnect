@@ -6,6 +6,7 @@ import AjouterForm from './AjouterForm';
 import Admin from './Admin';
 import SearchBar from './SearchBar';
 import Docteur from './Docteur';
+import './index.css' 
 function App() {
 
   const [selectedId,setSelectedId] = useState()
