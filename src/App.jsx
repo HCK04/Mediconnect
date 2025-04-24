@@ -17,6 +17,8 @@ import DetailPatient from './Docteur/DetailPatient';
 import ListeRendezvous from './Listrdv';
 import Listepatients from './DevTestFiles/PatientList';
 import DoctorRendezvous from './Docteur/DocteurRDV';
+import Login from './Login';
+import Register from './Register';
 
 function App() {
 
@@ -26,7 +28,6 @@ function App() {
     <>
     <Provider store={store}>
       <Navbar />
-        {/* Ensure content is pushed down */}
         <div className="pt-16"></div>
         <Routes>
           <Route path='/' element={<Body/>}></Route>
@@ -39,7 +40,8 @@ function App() {
           <Route path="/patients/:patientId" element={<DetailPatient />} />
           <Route path="/test2" element={<ListeRendezvous />}/>
           <Route path="/test3" element={<DoctorRendezvous />}/>
-
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           //DevTest
           <Route path="/ListePatient" element={<Listepatients />}/>
